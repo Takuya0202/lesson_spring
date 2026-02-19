@@ -1,0 +1,7 @@
+{
+    "name": "lesson_spring",
+    "dockerComposeFile": "../compose.yaml",
+    "service": "app",
+    "workspaceFolder": "/workspace",
+    "forwardPorts": [8080 , 5432]
+}
