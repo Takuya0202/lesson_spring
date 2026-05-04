@@ -2,3 +2,4 @@ rootProject.name = 'lesson-spring-workspace'
 
 includeBuild 'src/demo'
 includeBuild 'src/lombok/lesson_spring'
+includeBuild 'src/bean'
