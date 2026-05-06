@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thymeleaf 機能一覧</title>
+    <style>
+        body { font-family: sans-serif; margin: 20px; line-height: 1.6; }
+        section { margin-bottom: 30px; padding: 15px; border: 1px solid #ddd; border-radius: 6px; }
+        section h2 { margin-top: 0; border-bottom: 1px solid #eee; padding-bottom: 6px; }
+        table { border-collapse: collapse; }
+        th, td { border: 1px solid #ccc; padding: 6px 12px; text-align: left; }
+        th { background: #f5f5f5; }
+        .highlight { color: #0066cc; font-weight: bold; }
+    </style>
+</head>
+<body>
+
+<!-- ============================================================
+     1. フラグメント: th:insert / th:replace
+     ============================================================ -->
+<div th:insert="~{common :: header}"></div>
+
+<h1>Thymeleaf 機能デモ</h1>
+
+<!-- ============================================================
+     2. 変数式 ${...} / th:text / th:utext
+     ============================================================ -->
+<section>
+    <h2>変数式・テキスト出力</h2>
+
+    <p>th:text（エスケープ）: <span th:text="${member.name}">デフォルト名</span></p>
+    <p>th:utext（非エスケープ）: <span th:utext="'&lt;b&gt;' + ${member.name} + '&lt;/b&gt;'">デフォルト名</span></p>
+
+    <p>リテラル置換 |...|: <span th:text="|ID: ${member.id}, 名前: ${member.name}|">ID: ?, 名前: ?</span></p>
+</section>
+
+<!-- ============================================================
+     3. 選択変数式 *{...} / th:object
+     ============================================================ -->
+<section th:object="${mb}">
+    <h2>選択変数式 *{...} と th:object</h2>
+
+    <p>ID: <span th:text="*{id}">?</span></p>
+    <p>名前: <span th:text="*{name}">?</span></p>
+</section>
+
+<!-- ============================================================
+     4. リンク式 @{...}
+     ============================================================ -->
+<section>
+    <h2>リンク式 @{...}</h2>
+
+    <p><a th:href="@{/main}">絶対パス</a></p>
+    <p><a th:href="@{/main(id=${member.id}, name=${member.name})}">パラメータ付き</a></p>
+    <p><a th:href="@{'/member/' + ${member.id}}">パス変数風</a></p>
+</section>
+
+<!-- ============================================================
+     5. 条件: th:if / th:unless
+     ============================================================ -->
+<section>
+    <h2>条件分岐 th:if / th:unless</h2>
+
+    <p th:if="${member.id == 1}">th:if  → member.id は 1 です</p>
+    <p th:unless="${member.id == 1}">th:unless → member.id は 1 ではありません</p>
+
+    <p>三項演算子: <span th:text="${member.id >= 10} ? '10以上' : '10未満'">?</span></p>
+    <p>Elvis演算子: <span th:text="${member.name} ?: 'デフォルト'">?</span></p>
+</section>
+
+<!-- ============================================================
+     6. th:switch / th:case
+     ============================================================ -->
+<section>
+    <h2>th:switch / th:case</h2>
+
+    <div th:switch="${member.id}">
+        <p th:case="1">ID は 1 です</p>
+        <p th:case="2">ID は 2 です</p>
+        <p th:case="*">ID は 1 でも 2 でもありません</p>
+    </div>
+</section>
+
+<!-- ============================================================
+     7. 繰り返し: th:each（List<String>）
+     ============================================================ -->
+<section>
+    <h2>繰り返し th:each（List&lt;String&gt;）</h2>
+
+    <table>
+        <tr>
+            <th>index</th>
+            <th>count</th>
+            <th>値</th>
+            <th>size</th>
+            <th>even?</th>
+            <th>first?</th>
+            <th>last?</th>
+        </tr>
+        <tr th:each="item, stat : ${list}">
+            <td th:text="${stat.index}">0</td>
+            <td th:text="${stat.count}">1</td>
+            <td th:text="${item}">-</td>
+            <td th:text="${stat.size}">-</td>
+            <td th:text="${stat.even}">-</td>
+            <td th:text="${stat.first}">-</td>
+            <td th:text="${stat.last}">-</td>
+        </tr>
+    </table>
+</section>
+
+<!-- ============================================================
+     8. 繰り返し: th:each（List<Member>）
+     ============================================================ -->
+<section>
+    <h2>繰り返し th:each（List&lt;Member&gt;）</h2>
+
+    <table>
+        <tr>
+            <th>#</th>
+            <th>ID</th>
+            <th>名前</th>
+        </tr>
+        <tr th:each="m, stat : ${memberList}">
+            <td th:text="${stat.count}">1</td>
+            <td th:text="${m.id}">-</td>
+            <td th:text="${m.name}">-</td>
+        </tr>
+    </table>
+</section>
+
+<!-- ============================================================
+     9. 繰り返し: th:each（Map）
+     ============================================================ -->
+<section>
+    <h2>繰り返し th:each（Map&lt;String, Member&gt;）</h2>
+
+    <table>
+        <tr>
+            <th>キー</th>
+            <th>ID</th>
+            <th>名前</th>
+        </tr>
+        <tr th:each="entry : ${memberMap}">
+            <td th:text="${entry.key}">-</td>
+            <td th:text="${entry.value.id}">-</td>
+            <td th:text="${entry.value.name}">-</td>
+        </tr>
+    </table>
+</section>
+
+<!-- ============================================================
+     10. ローカル変数: th:with
+     ============================================================ -->
+<section>
+    <h2>ローカル変数 th:with</h2>
+
+    <div th:with="fullLabel = |[${member.id}] ${member.name}|, doubled = ${member.id * 2}">
+        <p>fullLabel: <span th:text="${fullLabel}">-</span></p>
+        <p>doubled: <span th:text="${doubled}">-</span></p>
+    </div>
+</section>
+
+<!-- ============================================================
+     11. インライン式 [[...]] / [(...)]
+     ============================================================ -->
+<section>
+    <h2>インライン式</h2>
+
+    <p th:inline="text">エスケープ: [[${member.name}]]</p>
+    <p th:inline="text">非エスケープ: [(${member.name})]</p>
+
+    <script th:inline="javascript">
+        /*<![CDATA[*/
+        var memberId   = /*[[${member.id}]]*/ 0;
+        var memberName = /*[[${member.name}]]*/ "default";
+        console.log("memberId:", memberId, "memberName:", memberName);
+        /*]]>*/
+    </script>
+</section>
+
+<!-- ============================================================
+     12. ユーティリティオブジェクト
+     ============================================================ -->
+<section>
+    <h2>ユーティリティオブジェクト</h2>
+
+    <!-- #strings -->
+    <h3>#strings</h3>
+    <p>toUpperCase: <span th:text="${#strings.toUpperCase(member.name)}">-</span></p>
+    <p>contains: <span th:text="${#strings.contains(member.name, 'am')}">-</span></p>
+    <p>isEmpty: <span th:text="${#strings.isEmpty(member.name)}">-</span></p>
+    <p>length: <span th:text="${#strings.length(member.name)}">-</span></p>
+    <p>defaultString: <span th:text="${#strings.defaultString(null, 'N/A')}">-</span></p>
+
+    <!-- #lists -->
+    <h3>#lists</h3>
+    <p>size: <span th:text="${#lists.size(list)}">-</span></p>
+    <p>isEmpty: <span th:text="${#lists.isEmpty(list)}">-</span></p>
+    <p>contains 'east': <span th:text="${#lists.contains(list, 'east')}">-</span></p>
+
+    <!-- #numbers -->
+    <h3>#numbers</h3>
+    <p>formatInteger (4桁0埋め): <span th:text="${#numbers.formatInteger(member.id, 4)}">-</span></p>
+
+    <!-- #temporals (Java 8 Date/Time) -->
+    <h3>#temporals</h3>
+    <p th:with="now = ${T(java.time.LocalDateTime).now()}">
+        現在日時: <span th:text="${#temporals.format(now, 'yyyy/MM/dd HH:mm:ss')}">-</span>
+    </p>
+
+    <!-- #objects -->
+    <h3>#objects</h3>
+    <p>nullSafe: <span th:text="${#objects.nullSafe(member.name, 'NULL')}">-</span></p>
+    <p>nullSafe(null): <span th:text="${#objects.nullSafe(null, 'NULL')}">-</span></p>
+</section>
+
+<!-- ============================================================
+     13. 属性の設定: th:attr / th:classappend / th:styleappend
+     ============================================================ -->
+<section>
+    <h2>属性の設定</h2>
+
+    <p th:attr="data-id=${member.id}">th:attr で data-id を設定</p>
+    <p class="base" th:classappend="${member.id == 1} ? 'highlight'">th:classappend で条件付きクラス追加</p>
+    <p th:styleappend="'font-size: ' + ${member.id * 12} + 'px'">th:styleappend でスタイル追加</p>
+</section>
+
+<!-- ============================================================
+     14. th:block（非表示ラッパー）
+     ============================================================ -->
+<section>
+    <h2>th:block</h2>
+
+    <table>
+        <tr>
+            <th>グループ</th>
+            <th>メンバー名</th>
+        </tr>
+        <th:block th:each="entry : ${memberMap}">
+            <tr>
+                <td th:text="${entry.key}">-</td>
+                <td th:text="${entry.value.name}">-</td>
+            </tr>
+        </th:block>
+    </table>
+</section>
+
+<!-- ============================================================
+     15. パラメータ付きフラグメント
+     ============================================================ -->
+<section>
+    <h2>パラメータ付きフラグメント</h2>
+
+    <div th:replace="~{common :: alert('正常に処理されました', 'info')}"></div>
+    <div th:replace="~{common :: alert('エラーが発生しました', 'error')}"></div>
+</section>
+
+<!-- ============================================================
+     16. th:remove（デモ用要素の削除制御）
+     ============================================================ -->
+<section>
+    <h2>th:remove</h2>
+
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>名前</th>
+        </tr>
+        <tr th:each="m : ${memberList}">
+            <td th:text="${m.id}">999</td>
+            <td th:text="${m.name}">サンプル</td>
+        </tr>
+        <tr th:remove="all">
+            <td>999</td>
+            <td>プロトタイプ用ダミー行（実行時に削除される）</td>
+        </tr>
+    </table>
+</section>
+
+<!-- ============================================================
+     17. フッターフラグメント
+     ============================================================ -->
+<div th:replace="~{common :: footer}"></div>
+
+</body>
+</html>

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>共通テンプレート</title>
+</head>
+<body>
+    <header th:fragment="header">
+        <h1>共通ヘッダー</h1>
+        <hr>
+    </header>
+
+    <footer th:fragment="footer">
+        <hr>
+        <p>共通フッター &copy; 2026</p>
+    </footer>
+
+    <div th:fragment="alert(msg, type)">
+        <p th:text="${msg}" th:style="'color:' + ${type == 'error' ? 'red' : 'blue'}">メッセージ</p>
+    </div>
+</body>
+</html>
