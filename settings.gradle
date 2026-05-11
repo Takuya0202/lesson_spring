@@ -1,10 +1,25 @@
 rootProject.name = 'lesson-spring-workspace'
 
-includeBuild 'src/demo'
-includeBuild 'src/lombok/lesson_spring'
-includeBuild 'src/bean'
-includeBuild 'src/injenction-sample'
-includeBuild 'src/aop'
-includeBuild 'src/mvc'
-includeBuild 'src/thymeleaf'
-includeBuild 'src/requestparam'
+include 'demo'
+project(':demo').projectDir = file('src/demo')
+
+include 'bean'
+project(':bean').projectDir = file('src/bean')
+
+include 'aop'
+project(':aop').projectDir = file('src/aop')
+
+include 'mvc'
+project(':mvc').projectDir = file('src/mvc')
+
+include 'injenction-sample'
+project(':injenction-sample').projectDir = file('src/injenction-sample')
+
+include 'lombok:lesson_spring'
+project(':lombok:lesson_spring').projectDir = file('src/lombok/lesson_spring')
+
+include 'thymeleaf'
+project(':thymeleaf').projectDir = file('src/thymeleaf')
+
+include 'requestparam'
+project(':requestparam').projectDir = file('src/requestparam')
