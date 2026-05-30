@@ -7,12 +7,12 @@
   <title>Document</title>
 </head>
 <body>
-<form action="./output.html" method="get">
+<form action="./output.html" method="get" th:action="@{/result}">
   <input type="text" name="val" id="get-form">
   <button type="submit">get送信</button>
 </form>
 
-<form action="./output.html" method="post">
+<form action="./output.html" method="post" th:action="@{/result}">
   <input type="text" name="val" id="post-form">
   <button type="submit">post送信</button>
 </form>
