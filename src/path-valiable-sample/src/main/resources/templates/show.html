@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org"></html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+<p>パスパラメーター</p>
+<div>
+  <a th:href="@{/function/1}"><span>1</span></a>
+  <a th:href="@{/function/2}"><span>2</span></a>
+  <a th:href="@{/function/3}"><span>3</span></a>
+</div>
+<div>
+  <form th:action="@{/send}" method="post">
+    <input type="submit" name="a" value="button-a">
+    <input type="submit" name="b" value="button-b">
+    <input type="submit" name="c" value="button-c">
+  </form>
+</div>
+</body>
+</html>
