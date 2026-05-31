@@ -6,9 +6,11 @@
   <title>Document</title>
 </head>
 <body>
-  <h1>Confirm</h1>
-  <p>Name: [[${name}]]</p>
-  <p>Age: [[${age}]]</p>
-  <p>Birth: [[${birth}]]</p>
+  <h1>Confirm - formクラス</h1>
+  <ul th:object="${sampleForm}">
+    <li>Name: <span th:text="*{name}"></span></li>
+    <li>Age: <span th:text="*{age}"></span></li>
+    <li>Birth: <span th:text="*{birth}"></span></li>
+  </ul>
 </body>
 </html>
