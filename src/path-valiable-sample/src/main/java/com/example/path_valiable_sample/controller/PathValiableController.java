@@ -3,6 +3,7 @@ package com.example.path_valiable_sample.controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
 public class PathValiableController {
@@ -27,5 +28,21 @@ public class PathValiableController {
                 break;
         }
         return view;
+    }
+
+    // リクエストボディの値分岐
+    @PostMapping(value = "send", params = "a")
+    public String showAView() {
+        return "submit/a";
+    }
+
+    @PostMapping(value = "send", params = "b")
+    public String showBView() {
+        return "submit/b";
+    }
+
+    @PostMapping(value = "send", params = "c")
+    public String showCView() {
+        return "submit/c";
     }
 }
