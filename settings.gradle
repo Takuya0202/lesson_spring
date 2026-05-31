@@ -26,3 +26,6 @@ project(':requestparam').projectDir = file('src/requestparam')
 
 include 'path-valiable-sample'
 project(':path-valiable-sample').projectDir = file('src/path-valiable-sample')
+
+include 'sample-validation'
+project(':sample-validation').projectDir = file('src/sample-validation')
