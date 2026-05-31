@@ -23,3 +23,6 @@ project(':thymeleaf').projectDir = file('src/thymeleaf')
 
 include 'requestparam'
 project(':requestparam').projectDir = file('src/requestparam')
+
+include 'path-valiable-sample'
+project(':path-valiable-sample').projectDir = file('src/path-valiable-sample')
