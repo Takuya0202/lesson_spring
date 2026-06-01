@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Greet (bad)</title>
+</head>
+<body>
+  <form th:action="@{/bad/greet}" method="post" th:object="${greetForm}">
+    <input type="text" th:field="*{name}" placeholder="名前を入力" />
+    <button type="submit">送信</button>
+  </form>
+  <ul th:if="${#fields.hasErrors('*')}">
+    <li th:each="error : ${#fields.errors('*')}" th:text="${error}"></li>
+  </ul>
+  <p th:if="${message}" th:text="${message}"></p>
+  <a href="/bad">計算フォームへ</a>
+</body>
+</html>

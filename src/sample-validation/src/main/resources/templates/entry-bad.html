@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document (bad)</title>
+</head>
+<body>
+<form th:action="@{/bad/calc}" method="post" th:object="${calcForm}">
+  <input type="number" th:field="*{val1}" />
+  <input type="number" th:field="*{val2}" />
+  <button type="submit">計算</button>
+</form>
+<ul th:if="${#fields.hasErrors('*')}">
+  <li th:each="error : ${#fields.errors('*')}" th:text="${error}"></li>
+</ul>
+<a href="/bad/greet">挨拶フォームへ</a>
+</body>
+</html>
