@@ -29,3 +29,6 @@ project(':path-valiable-sample').projectDir = file('src/path-valiable-sample')
 
 include 'sample-validation'
 project(':sample-validation').projectDir = file('src/sample-validation')
+
+include 'correlation-validation-sample'
+project(':correlation-validation-sample').projectDir = file('src/correlation-validation-sample')
