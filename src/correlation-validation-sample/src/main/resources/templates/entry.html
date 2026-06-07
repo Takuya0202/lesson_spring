@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="en"></html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,7 +9,9 @@
 <form th:action="@{/}" th:object="${sampleForm}" method="post">
   <input th:field="*{password}">
   <input th:field="*{confPassword}">
-  <p></p>
+  <p th:if="${#fields.hasErrors('samePassword')}" th:errors="*{samePassword}"></p>
+  <button type="submit">submit</button>
 </form>
 </body>
 </html>
+
