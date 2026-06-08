@@ -32,3 +32,6 @@ project(':sample-validation').projectDir = file('src/sample-validation')
 
 include 'correlation-validation-sample'
 project(':correlation-validation-sample').projectDir = file('src/correlation-validation-sample')
+
+include 'mybatis'
+project(':mybatis').projectDir = file('src/mybatis')
