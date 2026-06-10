@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Book Index</title>
+</head>
+<body>
+  <h1>Book管理</h1>
+  <ul>
+    <li><a th:href="@{/list}">一覧表示</a></li>
+    <li><a th:href="@{/detail/1}">詳細表示 (id=1)</a></li>
+    <li><a th:href="@{/create}">登録</a></li>
+    <li><a th:href="@{/update/1}">更新 (id=1)</a></li>
+    <li><a th:href="@{/delete/1}">削除 (id=1)</a></li>
+  </ul>
+</body>
+</html>
